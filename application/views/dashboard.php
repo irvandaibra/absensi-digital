@@ -11,7 +11,7 @@
     <meta name="description"
         content="Xtreme is powerful and clean admin dashboard template, inpired from Google's Material Design" />
     <meta name="robots" content="noindex,nofollow" />
-    <title>POS</title>
+    <title>Absensi</title>
     <link rel="icon" type="image/png" href="<?php echo base_url('package/assets/images/logo-pos.png')?>" />
     <style>
     .card-dashboard {
@@ -23,6 +23,49 @@
         overflow-y: scroll;
         overflow-x: hidden;
         max-height: 450px;
+    }
+
+    .highcharts-figure,
+    .highcharts-data-table table {
+        min-width: 360px;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #ebebeb;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table td,
+    .highcharts-data-table th,
+    .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table thead tr,
+    .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
     }
     </style>
 </head>
@@ -52,57 +95,251 @@
             <?php $this->load->view('style/sidebar') ?>
             <div class="page-wrapper" style="min-height: 100vh; background-color: #EFF5F5 ">
                 <div class="page-breadcrumb">
+                <div class="container-fluid">
                     <div class="row">
-                        <div class="col-5 align-self-center">
-                            <h2 class="page-title">Dashboard</h2>
-                           
+                        <div class="col-sm-12 col-lg-8">
+                            <div class="card w-100">
+                                <div class="py-2 px-4 border-bottom">
+                                    <h3 class="">Dashboard</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-4 mb-3 mb-md-0">
+                                            <div class="d-flex align-items-center">
+                                                <div class="me-2">
+                                                    <span class="text-primary display-5"><i
+                                                            class="ri-user-fill"></i></span>
+                                                </div>
+                                                <div>
+                                                    <span class="text-muted">Total Jamaah</span>
+                                                    <h3 class="font-medium mb-0"><?php echo $total_jamaah; ?></h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-4 mb-3 mb-md-0">
+                                            <div class="d-flex align-items-center">
+                                                <div class="me-2">
+                                                    <span class="text-primary display-5"><i
+                                                            class="ri-todo-fill"></i></span>
+                                                </div>
+                                                <div>
+                                                    <span class="text-muted">Data Absensi</span>
+                                                    <h3 class="font-medium mb-0"><?php echo $total_absensi; ?></h3>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-4 mb-3 mb-md-0">
+                                            <div class="d-flex align-items-center">
+                                                <div class="me-2">
+                                                    <span class="text-primary display-5"><i class="ri-calendar-fill"></i></span>
+                                                </div>
+                                                <div>
+                                                    <span class="text-muted">Total Kegiatan</span>
+                                                    <h3 class="font-medium mb-0"><?php echo $total_daftar_kegiatan; ?></h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                                <figure class="">
+                                    <div id="container"></div>
+                                    <p class="highcharts-description">
+                                    </p>
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-4">
+                            <div>
+                                <div class="">
+                                    <div id="containerr"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="">
+                                    <div id="containerrr"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="container-fluid">
-                <div style="width:75%;">
-                    <canvas id="myChart"></canvas>
-                </div>
-                </div>
+</div>
             </div>
         </div>
     </div>
     <?php $this->load->view('style/js') ?>
 </body>
-
 <script type="text/javascript">
-var ctx = document.getElementById('myChart').getContext('2d');
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Rekap Absensi',
+            align: 'left'
+        },
 
-var data = <?php echo json_encode($chart_data); ?>;
+        subtitle: {
+            text: '',
+            align: 'left'
+        },
 
-var labels = [];
-var values = [];
-
-data.forEach(function(item) {
-    labels.push(item.label);
-    values.push(item.value);
-});
-
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: labels,
-        datasets: [{
-            label: 'Chart Data',
-            data: values,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
+        yAxis: {
+            title: {
+                text: 'Angka Absens'
             }
+        },
+
+        xAxis: {
+            accessibility: {
+                rangeDescription: 'Range is a year, current year is: <?php echo date('Y') ?>'
+            }
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+                pointStart: <?php echo date('Y') ?>
+            }
+        },
+
+        series: [{
+            name: 'Hadir',
+            data: [<?php echo $rekap_hadir ?>]
+        }, {
+            name: 'Ijin',
+            data: [<?php echo $rekap_ijin ?>]
+        }, {
+            name: 'Alpha',
+            data: [<?php echo $rekap_alpha ?>]
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
         }
-    }
-});
+
+    });
+    Highcharts.chart('containerr', {
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Kategori Usia'
+        },
+        tooltip: {
+            valueSuffix: '%'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: [{
+                    enabled: true,
+                    distance: 20
+                }, {
+                    enabled: true,
+                    distance: -40,
+                    format: '{point.percentage:.1f}%',
+                    style: {
+                        fontSize: '1.2em',
+                        textOutline: 'none',
+                        opacity: 0.7
+                    },
+                    filter: {
+                        operator: '>',
+                        property: 'percentage',
+                        value: 10
+                    }
+                }]
+            }
+        },
+        series: [{
+            name: 'Percentage',
+            colorByPoint: true,
+            data: [{
+                    name: 'Lansia',
+                    y: <?php echo $kategori_lansia ?>
+                },
+                {
+                    name: 'Umum',
+                    y: <?php echo $kategori_umum ?>
+                },
+                {
+                    name: 'Remaja',
+                    y: <?php echo $kategori_remaja ?>
+                }
+            ]
+        }]
+    });
+    Highcharts.chart('containerrr', {
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Status'
+        },
+        tooltip: {
+            valueSuffix: '%'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: [{
+                    enabled: true,
+                    distance: 20
+                }, {
+                    enabled: true,
+                    distance: -40,
+                    format: '{point.percentage:.1f}%',
+                    style: {
+                        fontSize: '1.2em',
+                        textOutline: 'none',
+                        opacity: 0.7
+                    },
+                    filter: {
+                        operator: '>',
+                        property: 'percentage',
+                        value: 10
+                    }
+                }]
+            }
+        },
+        series: [{
+            name: 'Percentage',
+            colorByPoint: true,
+            data: [{
+                    name: 'Pribumi',
+                    y: <?php echo $status_pribumi ?>
+                },
+                {
+                    name: 'Pendatang',
+                    y: <?php echo $status_pendatang ?>
+                },
+            ]
+        }]
+    });
 </script>
 
 </html>

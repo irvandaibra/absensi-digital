@@ -18,16 +18,18 @@
 <script src="<?php echo base_url('package/dist/js/custom.min.js')?>"></script>
 <!-- Datatables JS -->
 <script src="<?php echo base_url('package/assets/Datatables/datatables.min.js')?>"></script>
-<script src="<?php echo base_url('package/assets/Datatables/Responsive-2.3.1/css/responsive.bootstrap5.min.js')?>">
-</script>
+<!-- <script src="<?php echo base_url('package/assets/Datatables/Responsive-2.3.1/css/responsive.bootstrap5.min.js')?>"></script> -->
 <!-- Datatables CSS -->
 <link href="<?php echo base_url('package/assets/Datatables/datatables.min.css')?>" rel="stylesheet">
 </link>
-<link href="<?php echo base_url('package/assets/Datatables/Responsive-2.3.1/css/responsive.bootstrap5.min.css')?>"
-    rel="stylesheet">
-</link>
+<!-- <link href="<?php echo base_url('package/assets/Datatables/Responsive-2.3.1/css/responsive.bootstrap5.min.css')?>" rel="stylesheet"></link> -->
 <script src="<?php echo base_url('package/ckeditor/ckeditor.js'); ?>"></script>
 
+<script src="<?php echo base_url('package/chart/code/highcharts.js'); ?>"></script>
+<script src="<?php echo base_url('package/chart/code/modules/series-label.js'); ?>"></script>
+<script src="<?php echo base_url('package/chart/code/modules/exporting.js'); ?>"></script>
+<script src="<?php echo base_url('package/chart/code/modules/export-data.js'); ?>"></script>
+<script src="<?php echo base_url('package/chart/code/modules/accessibility.js'); ?>"></script>
 <!-- Select2 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>

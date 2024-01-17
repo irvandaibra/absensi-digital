@@ -74,7 +74,7 @@
                  <span class="font-medium">Digital</span> Absensi
                 </h2>
                 <p class="op-5 text-white fs-4 mt-4">
-                 Membuat absensi mejadi lebih terstruktur, efisien, dan transparan
+                  Membuat Absensi Terstrukur, Efisien, Dan Transparan
                 </p>
               </div>
             </div>
@@ -122,7 +122,8 @@
                 <div class="card-body">
                   <h2>Selamat Datang</h2>
                   <p class="text-muted fs-4">
-                   Masukan Email Admin & Password Admin
+                    Masukan Email Admin & Password Admin
+                    <!-- <a href="javascript:void(0)" id="to-register">Buat Akun Disini</a> -->
                   </p>
                   <?php echo form_open('auth/login', 'class="form-horizontal mt-2 pt-2 needs-validation" novalidate'); ?>
                     <div class="form-floating mb-3">

@@ -125,8 +125,10 @@
                                         <div class="col-12">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h4 class="card-title">Diagram Perbandingan</h4>
-                                                    <canvas id="myChart"></canvas>
+                                                    <h4 class="card-title">Diagram</h4>
+                                                <div>
+                                                <div id="container"></div>
+                                                </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,6 +144,51 @@
         <?php $this->load->view('style/js') ?>
 </body>
 <script>
+    Highcharts.chart('container', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: '',
+        align: 'left'
+    },
+    xAxis: {
+        categories: [''],
+        crosshair: true,
+        accessibility: {
+            description: 'Countries'
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Data Absensi'
+        }
+    },
+    tooltip: {
+        valueSuffix: ''
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [
+        {
+            name: 'Hadir',
+            data: [292]
+        },
+        {
+            name: 'Ijin',
+            data: [86]
+        },
+        {
+            name: 'Alpha',
+            data: [20]
+        }
+    ]
+});
 </script>
 
 </html>
