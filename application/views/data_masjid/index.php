@@ -127,6 +127,13 @@ $(document).ready(function() {
             },
             {
                 data: "status",
+                "render": function(data, type, row, meta) {
+                    if (data == 1) {
+                        return "<a class=>Aktif</a>";
+                    } else {
+                        return "Tidak Aktif";
+                    }
+                }
             },
             {
                 data: "id",
